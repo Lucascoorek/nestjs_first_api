@@ -33,4 +33,7 @@ export class ProductsService {
     this.products[foundIndex] = prod;
     return this.products[foundIndex];
   }
+  deleteProduct(id: string) {
+    this.products = this.products.filter(prod => prod.id !== id);
+  }
 }
