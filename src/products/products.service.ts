@@ -31,5 +31,6 @@ export class ProductsService {
     if (desc) prod.description = desc;
     if (price) prod.price = price;
     this.products[foundIndex] = prod;
+    return this.products[foundIndex];
   }
 }
