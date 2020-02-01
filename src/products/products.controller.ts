@@ -29,8 +29,8 @@ export class ProductsController {
   }
 
   @Get()
-  getAllProducts() {
-    return this.productsService.getProducts();
+  async getAllProducts() {
+    return await this.productsService.getProducts();
   }
 
   @Get(":id")

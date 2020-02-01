@@ -17,8 +17,8 @@ export class ProductsService {
     });
     return await newProduct.save();
   }
-  getProducts() {
-    // return [...this.products];
+  async getProducts() {
+    return await this.productModel.find();
   }
   getSingleProduct(id: string) {
     // const product = this.products.find(prod => prod.id === id);
