@@ -1,8 +1,8 @@
-export class Product {
-  constructor(
-    public id: string,
-    public title: string,
-    public description: string,
-    public price: number
-  ) {}
+import { Document } from "mongoose";
+
+export interface Product extends Document {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
 }

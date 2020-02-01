@@ -15,17 +15,17 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-  addProduct(
+  async addProduct(
     @Body("title") prodTitile: string,
     @Body("description") prodDesc: string,
     @Body("price") prodPrice: number
-  ): { id: string } {
-    const generatedId = this.productsService.insertProduct(
+  ) {
+    const newProduct = await this.productsService.insertProduct(
       prodTitile,
       prodDesc,
       prodPrice
     );
-    return { id: generatedId };
+    return { newProduct };
   }
 
   @Get()
@@ -45,13 +45,13 @@ export class ProductsController {
     @Body("description") prodDesc: string,
     @Body("price") prodPrice: number
   ) {
-    const updatedProd: Product = this.productsService.updateProduct(
-      prodId,
-      prodTitle,
-      prodDesc,
-      prodPrice
-    );
-    return updatedProd;
+    // const updatedProd: Product = this.productsService.updateProduct(
+    //   prodId,
+    //   prodTitle,
+    //   prodDesc,
+    //   prodPrice
+    // );
+    // return updatedProd;
   }
 
   @Delete(":id")
