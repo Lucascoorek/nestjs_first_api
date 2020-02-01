@@ -38,7 +38,9 @@ export class ProductsService {
     await product.save();
     return product;
   }
-  deleteProduct(id: string) {
-    // this.products = this.products.filter(prod => prod.id !== id);
+  async deleteProduct(id: string) {
+    const foundProduct = await this.productModel.findByIdAndDelete({ _id: id });
+    if (!foundProduct) throw new NotFoundException("product not found");
+    return foundProduct;
   }
 }
