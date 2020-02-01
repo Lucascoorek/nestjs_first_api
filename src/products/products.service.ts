@@ -18,26 +18,25 @@ export class ProductsService {
     return await newProduct.save();
   }
   async getProducts() {
-    return await this.productModel.find();
+    return await this.productModel.find().exec();
   }
   async getSingleProduct(id: string) {
-    const product = await this.productModel.findById(id);
+    const product = await this.productModel.findById(id).exec();
     if (!product) {
       throw new NotFoundException("product not found");
     }
     return product;
   }
-  updateProduct(id: string, title: string, desc: string, price: number) {
-    // const foundIndex: number = this.products.findIndex(prod => prod.id === id);
-    // if (foundIndex === -1) {
-    //   throw new NotFoundException("no product to update");
-    // }
-    // const prod = this.products[foundIndex];
-    // if (title) prod.title = title;
-    // if (desc) prod.description = desc;
-    // if (price) prod.price = price;
-    // this.products[foundIndex] = prod;
-    // return this.products[foundIndex];
+  async updateProduct(id: string, title: string, desc: string, price: number) {
+    const product = await this.productModel.findById(id).exec();
+    if (!product) {
+      throw new NotFoundException("product not found");
+    }
+    if (title) product.title = title;
+    if (desc) product.description = desc;
+    if (price) product.price = price;
+    await product.save();
+    return product;
   }
   deleteProduct(id: string) {
     // this.products = this.products.filter(prod => prod.id !== id);
