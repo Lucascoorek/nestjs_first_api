@@ -20,12 +20,12 @@ export class ProductsService {
   async getProducts() {
     return await this.productModel.find();
   }
-  getSingleProduct(id: string) {
-    // const product = this.products.find(prod => prod.id === id);
-    // if (!product) {
-    //   throw new NotFoundException("product not found");
-    // }
-    // return { ...product };
+  async getSingleProduct(id: string) {
+    const product = await this.productModel.findById(id);
+    if (!product) {
+      throw new NotFoundException("product not found");
+    }
+    return product;
   }
   updateProduct(id: string, title: string, desc: string, price: number) {
     // const foundIndex: number = this.products.findIndex(prod => prod.id === id);
